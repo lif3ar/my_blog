@@ -1,0 +1,18 @@
+<%= render 'layouts/messages' %>
+
+<div class="row">
+  <h1 align="center">Articles list</h1>
+  <% @articles.each do |article| %>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+        <h4><%= link_to "#{article.title}", article %></h4>
+        <li><%= truncate(article.description, length: 300) %></li>
+          <div class="article-list-buttons">
+          <li><%= link_to "Edit article", edit_article_path(article), class: "btn btn-primary btn-xs" %>
+              <%= link_to "Delete article", article_path(article), class: "btn btn-danger btn-xs",
+                method: :delete, data: {confirm: "Are you sure?"} %></li>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>

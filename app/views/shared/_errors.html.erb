@@ -1,0 +1,8 @@
+<% if obj.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+  <h4>This action is impossible, because of the following errors:</h4>
+    <% obj.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
