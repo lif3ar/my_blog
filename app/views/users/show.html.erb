@@ -3,13 +3,21 @@
 <div class="container">
   <%= render 'layouts/messages' %>
     <h1>Welcome to <%= @user.username %>'s page.</h1>
+    <div class="center">
+      <%= gravatar_for(@user) %>
+    </div>
+    <h4 align="center"><%= @user.username %>'s articles:</h4>
     <div class="well col-md-8 col-md-offset-2">
-      <div class="center">
-        <%= gravatar_for(@user) %>
-      </div>
-      <h4 align="center"><%= @user.username %>'s articles:</h4>
-      <div class="center">
-        <li><%= link_to "#", "#" %></li>
+      <div class="articles-list">
+        <% @user.articles.each do |article| %>
+        <h4><%= link_to "#{article.title}", article %></h4>
+        <p><%= truncate(article.description, length: 300) %></p>
+        <div class="user-articles-list-buttons">
+          <%= link_to "Edit article", edit_article_path(article), class: "btn btn-primary btn-xs" %>
+          <%= link_to "Delete article", article_path(article), 
+            method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-danger btn-xs" %>
+        </div>
+        <% end %>
       </div>
     </div>
 </div>

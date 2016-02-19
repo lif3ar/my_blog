@@ -41,9 +41,19 @@ h1 {
   padding-bottom: 15px;
 }
 
+.articles-list p {
+  padding-bottom: 5px;
+}
+
 .article-list-buttons {
   border-top: 1px solid #eaeaea;
+  padding-top: 10px;
+}
+
+.user-articles-list-buttons {
+  border-top: 1px solid #eaeaea;
   padding-top: 5px;
+  padding-bottom: 25px;
 }
 
 li {
