@@ -1,0 +1,14 @@
+<%= render 'layouts/messages' %>
+
+<div class="row">
+  <h1 align="center">Users list:</h1>
+  <% @user.each do |user| %>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+        <h4><%= link_to "#{user.username}", user %></h4>
+          <li><%= link_to "Delete user", user_path(user), class: "btn btn-danger btn-xs",
+                method: :delete, data: {confirm: "Are you sure?"} %></li>
+      </div>
+    </div>
+  <% end %>
+</div>
