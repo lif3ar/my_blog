@@ -4,11 +4,13 @@
     <div class="well col-md-8 col-md-offset-2">
       <h4 align="center">Description:</h4>
       <li><%= @article.description %></li>
-      <div class="article-list-buttons">
-        <li><%= link_to "Edit article", edit_article_path(@article), class: "btn btn-primary btn-xs" %>
-            <%= link_to "Delete article", article_path(@article), class: "btn btn-danger btn-xs",
-              method: :delete, data: {confirm: "Are you sure?"} %>
-            <%= link_to "All articles listing", articles_path, class: "btn btn-success btn-xs" %></li>
-      </div>
+      <% if logged_in? && @article.user %>
+        <div class="article-list-buttons">
+          <li><%= link_to "Edit article", edit_article_path(@article), class: "btn btn-primary btn-xs" %>
+              <%= link_to "Delete article", article_path(@article), class: "btn btn-danger btn-xs",
+                method: :delete, data: {confirm: "Are you sure?"} %>
+              <%= link_to "All articles listing", articles_path, class: "btn btn-success btn-xs" %></li>
+        </div>
+      <% end %>
     </div>
 </div>

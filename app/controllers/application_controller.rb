@@ -20,4 +20,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def require_same_user
+    if current_user != @article.user
+      flash[:danger] = "You can only perform that action to your own articles"
+      redirect_to articles_path
+    end
+  end
+  
 end
