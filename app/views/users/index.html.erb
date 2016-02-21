@@ -6,6 +6,7 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="well">
         <h4><%= link_to "#{user.username}", user %></h4>
+        <li>User has <%= pluralize(user.articles.count, "article") %>.</li>
           <% if logged_in? && user %>
             <li><%= link_to "Delete user", user_path(user), class: "btn btn-danger btn-xs",
                   method: :delete, data: {confirm: "Are you sure?"} %></li>

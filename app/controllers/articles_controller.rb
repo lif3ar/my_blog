@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   
   before_action :require_user, except: [:index, :show]
+  before_action :set_article, only: [:show, :edit, :update]
   
   def index
     @articles = Article.all
@@ -8,6 +9,10 @@ class ArticlesController < ApplicationController
   
   def new
     @article = Article.new
+    if !logged_in?
+      flash[:danger] = "You must log in to add an article"
+      redirect_to root_path
+    end
   end
   
   def create
@@ -22,15 +27,12 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
     @article.update(article_params)
     if @article.save
       flash[:success] = "The article has been updated."
@@ -52,4 +54,9 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :description)
     end
+    
+    def set_article
+      @article = Article.find(params[:id])
+    end
+    
 end

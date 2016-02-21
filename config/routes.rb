@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   root 'home#home'
 
   resources :articles
-  resources :users, except: [:new]
+  resources :users, except: [:new, :edit]
   
   get 'signup', to: 'users#new'
+  get 'edit', to: 'users#path'
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
