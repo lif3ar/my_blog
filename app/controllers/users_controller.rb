@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:destroy]
   
   def index
     @user = User.all
@@ -49,6 +51,19 @@ class UsersController < ApplicationController
     
     def set_user
       @user = User.find(params[:id])
+    end
+    
+    def require_same_user
+      if current_user != @user and !current_user.admin?
+        flash[:danger] = "You can't perform that action"
+        redirect_to root_path
+      end
+    end
+    
+    def require_admin
+      if logged_in? and !current_user.admin?
+        redirect_to root path
+      end
     end
     
 end

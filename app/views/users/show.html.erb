@@ -13,7 +13,7 @@
       <% @user.articles.each do |article| %>
         <h4><%= link_to "#{article.title}", article %></h4>
         <p><%= truncate(article.description, length: 300) %></p>
-        <% if logged_in? && article.user %>
+        <% if logged_in? && current_user == article.user || current_user.admin? %>
           <div class="user-articles-list-buttons">
             <%= link_to "Edit article", edit_article_path(article), class: "btn btn-primary btn-xs" %>
             <%= link_to "Delete article", article_path(article), 

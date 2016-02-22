@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
   root 'home#home'
+  get 'about', to: 'home#about'
 
   resources :articles
-  resources :users, except: [:new, :edit]
+  resources :users, except: [:new]
   
   get 'signup', to: 'users#new'
-  get 'edit', to: 'users#path'
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
